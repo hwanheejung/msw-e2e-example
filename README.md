@@ -111,12 +111,20 @@ yarn playwright test
 ```bash
 yarn e2e-autogen:generate
 ```
+- [`__generated-stub__`](./tests/e2e/__generated-stub__) 경로에 생성된 스텁 코드를 복사하여 [user.spec.ts](./tests/e2e/user.spec.ts)에서 테스트 구현
+- playwright의 code generator, Cursor AI를 사용하면 빠르게 테스트 작성 가능
+
+### 테스트 실행
+```bash
+yarn playwright test
+```
 
 ### 테스트 결과 업데이트
 
 ```bash
 yarn e2e-autogen:update
 ```
+<img width="1369" alt="스크린샷 2025-07-10 오후 6 02 04" src="https://github.com/user-attachments/assets/7b62c44e-a74a-4c3f-a457-ea48703dba7c" />
 
 ## 참고 사항
 
