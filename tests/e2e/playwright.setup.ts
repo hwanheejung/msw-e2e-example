@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { test as testBase } from "@playwright/test";
 import { createNetworkFixture, type NetworkFixture } from "@msw/playwright";
 import { handlers } from "../mocks/__handlers__";
@@ -40,6 +41,37 @@ export const test = testBase.extend<TFixtures>({
           };
           return originalFetch(input, newInit);
         };
+
+        // Axios (XMLHttpRequest 기반 라이브러리) 대응
+        if (typeof XMLHttpRequest !== "undefined") {
+          const originalXHROpen = XMLHttpRequest.prototype.open;
+          const originalXHRSend = XMLHttpRequest.prototype.send;
+
+          XMLHttpRequest.prototype.open = function (...args: any[]) {
+            // open 호출 이후, send 직전에 header 주입 가능하도록 플래그 저장
+            (this as any)._scenarioSid = sid;
+            return originalXHROpen.apply(this, args as any);
+          } as any;
+
+          XMLHttpRequest.prototype.send = function (...args: any[]) {
+            try {
+              if (typeof (this as any).setRequestHeader === "function") {
+                (this as any).setRequestHeader(
+                  "x-scenario",
+                  (this as any)._scenarioSid ?? sid
+                );
+              }
+            } catch {
+              // ignore
+            }
+            return originalXHRSend.apply(this, args as any);
+          } as any;
+        }
+
+        // 글로벌 axios 인스턴스가 있다면 기본 헤더 설정
+        if ((window as any).axios) {
+          (window as any).axios.defaults.headers.common["x-scenario"] = sid;
+        }
       }, scenarioId);
     }
 
