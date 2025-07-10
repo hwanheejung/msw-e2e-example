@@ -13,32 +13,22 @@ import type { TScenarioConfig } from "./__types__/scenarios/scenarios.type";
  * allowCustomStatus: true를 사용하면 OpenAPI 명세에 없는 status 코드도 사용 가능합니다.
  */
 export const scenarios: TScenarioConfig = {
-  // 예시 시나리오들 (필요에 따라 수정/추가)
   "TC-1.1": {
-    description: "성공 시나리오",
+    description: "유저 목록 조회 성공 시나리오",
     api: {
-      // "/users": {
-      //   "GET": { status: 200 },
-      //   "POST": { status: 201 }
-      // },
-      // "/users/{id}": {
-      //   "GET": { status: 200 },
-      //   "PUT": { status: 200 },
-      //   "DELETE": { status: 204 }
-      // }
+      "/users": {
+        GET: { status: 200 },
+        POST: { status: 201 },
+      },
     },
   },
   "TC-1.2": {
-    description: "오류 시나리오",
+    description: "유저 목록 조회 실패 시나리오",
     api: {
-      // "/users": {
-      //   "GET": { status: 500 },
-      //   "POST": { status: 400 }
-      // },
-      // 커스텀 status 코드 사용 예시
-      // "/users/{id}": {
-      //   "GET": { status: 418, allowCustomStatus: true }
-      // }
+      "/users": {
+        GET: { status: 400, allowCustomStatus: true },
+        POST: { status: 400 },
+      },
     },
   },
 };

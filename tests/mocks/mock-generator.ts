@@ -3,11 +3,6 @@ const require = createRequire(import.meta.url);
 const { generateMocks } = require("@dataai/msw-auto-mock/node");
 import { controllers } from "./controllers";
 
-// import {
-//   selectResponseByScenario,
-//   transformJSONSchemaToFakerCode,
-// } from "@dataai/msw-auto-mock";
-
 import { type TOptions } from "@dataai/msw-auto-mock";
 import type { TControllers } from "./__types__/controllers/index";
 
