@@ -10,8 +10,11 @@ servers:
 paths:
   /users:
     get:
+      tags:
+        - users
       summary: Get all users
       description: Retrieve a list of all users
+      operationId: get_users_users_get
       responses:
         "200":
           description: Successful response
@@ -21,9 +24,13 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+                title: Response Get Users Users Get
     post:
+      tags:
+        - users
       summary: Create a new user
       description: Add a new user to the system
+      operationId: create_user_users_post
       requestBody:
         required: true
         content:
@@ -37,12 +44,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
+                title: Response Create User Users Post
         "400":
           description: Invalid input
 
   /users/{id}:
     get:
+      tags:
+        - users
       summary: Get user by ID
+      description: Get a specific user by their ID
+      operationId: get_user_users_id_get
       parameters:
         - name: id
           in: path
@@ -56,6 +68,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
+                title: Response Get User Users Id Get
         "404":
           description: User not found
 
@@ -63,6 +76,7 @@ components:
   schemas:
     User:
       type: object
+      title: User
       properties:
         id:
           type: string
@@ -82,6 +96,7 @@ components:
 
     UserInput:
       type: object
+      title: UserInput
       properties:
         username:
           type: string
