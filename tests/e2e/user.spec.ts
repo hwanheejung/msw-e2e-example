@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "./playwright.setup";
 
-test("[TC-1.1] 유저 리스트", async ({ page }) => {
+test("[TC-1.1] 유저 목록 조회 성공 시나리오", async ({ page }) => {
   await test.step("[TC-1.1.1] 메인화면 로드 -> 제목(User Management)이 표시되어야 한다", async () => {
     // 📍 UI Path: 홈
     // 🎬 When: 메인화면 로드
@@ -31,5 +31,18 @@ test("[TC-1.1] 유저 리스트", async ({ page }) => {
           - listitem: Hermione Granger (hermione.granger@hogwarts.com)
           - listitem: Ron Weasley (ron.weasley@hogwarts.com)
         `);
+  });
+});
+
+test("[TC-1.2] 유저 목록 조회 실패 시나리오", async ({ page }) => {
+  await test.step("[TC-1.2.1] 메인화면 로드 -> 에러 메시지(유저 목록을 불러오는 데 실패했습니다)가 표시되어야 한다", async () => {
+    // 📍 UI Path: 홈
+    // 🎬 When: 메인화면 로드
+    await page.goto("http://localhost:5173/");
+
+    // ✅ Then: 에러 메시지(유저 목록을 불러오는 데 실패했습니다)가 표시되어야 한다
+    await expect(
+      page.getByText("유저 목록을 불러오는 데 실패했습니다")
+    ).toBeVisible();
   });
 });

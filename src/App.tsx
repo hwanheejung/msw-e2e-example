@@ -72,7 +72,10 @@ export function UserList() {
   }, []);
 
   if (loading) return <p>Loading users...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (error)
+    return (
+      <p style={{ color: "red" }}>유저 목록을 불러오는 데 실패했습니다.</p>
+    );
 
   return (
     <ul>
