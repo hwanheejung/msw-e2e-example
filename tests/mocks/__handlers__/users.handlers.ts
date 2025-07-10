@@ -154,15 +154,12 @@ export const usersHandlers = [
   }),
 ];
 
-export function getGetUsersUsersGet200Response() {
-  return [
-    ...new Array(faker.number.int({ min: 1, max: MAX_ARRAY_LENGTH })).keys(),
-  ].map((_) => ({
-    id: faker.string.uuid(),
-    username: faker.person.fullName(),
-    email: faker.internet.email(),
-    createdAt: faker.date.past(),
-  }));
+export function getGetUsersUsersGet200Response(
+  info: Parameters<HttpResponseResolver>[0],
+) {
+  return (
+    controllers as Required<typeof controllers>
+  ).getGetUsersUsersGet200Response(info);
 }
 
 export function getCreateUserUsersPost201Response() {

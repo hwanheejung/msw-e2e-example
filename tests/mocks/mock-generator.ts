@@ -1,6 +1,7 @@
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const { generateMocks } = require("@dataai/msw-auto-mock/node");
+import { controllers } from "./controllers";
 
 // import {
 //   selectResponseByScenario,
@@ -15,6 +16,7 @@ async function autoGenerateMocks() {
     console.log("[MSW] 목 파일 생성 시작...");
 
     const options: TOptions<TControllers> = {
+      controllers,
       input: "./swagger/openapi.yml",
       outputDir: "./tests/mocks",
       environment: "react",
