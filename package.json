@@ -8,9 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-msw-mock": "tsx tests/mocks/mock-generator.ts"
+    "msw-auto-mock:generate": "tsx tests/mocks/mock-generator.ts",
+    "e2e-autogen:generate": "e2e-autogen generate --sheets https://docs.google.com/spreadsheets/d/1EjjINCvD-4FkSETb_Z88qauXUpF7NU9y7jXN0RTNTm4/edit --output ./tests/e2e/__generated-stub__",
+    "e2e-autogen:update": "e2e-autogen update --sheets https://docs.google.com/spreadsheets/d/1EjjINCvD-4FkSETb_Z88qauXUpF7NU9y7jXN0RTNTm4/edit --results ./tests/reporters/results.json"
   },
   "dependencies": {
+    "@playwright/test": "^1.53.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -18,6 +21,7 @@
     "@dataai/msw-auto-mock": "^0.31.0",
     "@eslint/js": "^9.30.1",
     "@faker-js/faker": "^9.9.0",
+    "@msw/playwright": "^0.4.2",
     "@types/node": "^24.0.12",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
